@@ -469,7 +469,6 @@ function tap_init_gateway_class() {
 			}
 
 			if ($this->ui_mode == 'popup' || $this->ui_mode == 'redirect' ){
-				// die(json_encode($this));
 			   wp_register_style( 'tap_payment',  plugins_url('tap-payment.css', __FILE__));
 		 		wp_enqueue_style('tap_payment');
 		 		wp_register_style( 'tap_style', '//goSellJSLib.b-cdn.net/v1.6.1/css/gosell.css' );
