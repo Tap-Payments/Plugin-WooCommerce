@@ -813,5 +813,39 @@ function tap_init_gateway_class() {
 	 			return false;
 	 		}
 		}
+		
    }
+}
+
+add_action( 'woocommerce_blocks_loaded', 'rudr_gateway_block_support' );
+function rudr_gateway_block_support() {
+
+	// if( ! class_exists( 'Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType' ) ) {
+	// 	return;
+	// }
+
+	// here we're including our "gateway block support class"
+	require_once __DIR__ . '/includes/wc-tap-gateway-blocks-support.php';
+
+	// registering the PHP class we have just included
+	add_action(
+		'woocommerce_blocks_payment_method_type_registration',
+		function( Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
+			$payment_method_registry->register( new WC_Tap_Gateway_Blocks_Support );
+		}
+	);
+
+}
+add_action( 'before_woocommerce_init', 'rudr_cart_checkout_blocks_compatibility' );
+
+function rudr_cart_checkout_blocks_compatibility() {
+
+    if( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+				'cart_checkout_blocks',
+				__FILE__,
+				true // true (compatible, default) or false (not compatible)
+			);
+    }
+		
 }
