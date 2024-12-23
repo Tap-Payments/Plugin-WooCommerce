@@ -552,14 +552,25 @@ function tap_init_gateway_class() {
 
 			   $charge_url = 'https://api.tap.company/v2/charges';
 			   $first_name = $_POST['billing_first_name'];
+			   if (empty($first_name)) {
+				$first_name = $order->billing_first_name;
+			   }
 			   $last_name  = $_POST['billing_last_name'];
+			   if (empty($last_name)) {
+				$last_name = $order->billing_last_name;
+			   }
 			   $country    = $_POST['billing_country'];
 			   $city       = $_POST['billing_city'];
-				$billing_address = $_POST['billing_address_1'];
-
+			   $billing_address = $_POST['billing_address_1'];
 			   $return_url    = $order->get_checkout_order_received_url();
 			   $billing_email = $_POST['billing_email'];
+			   if (empty($billing_email)) {
+				$billing_email = $order->billing_email;
+			   }
 			   $biliing_fone  = $_POST['billing_phone'];
+			   if (empty($biliing_fone)) {
+				$biliing_fone = $order->billing_phone;
+			   }
 			   $avenue = $_POST['billing_address_2'];
 			   $order_amount  = $order->get_total();
 			   $post_url      = get_site_url()."/wc-api/tap_webhook";
@@ -656,13 +667,25 @@ function tap_init_gateway_class() {
                
             $charge_url = 'https://api.tap.company/v2/charges';
             $first_name = $_POST['billing_first_name'];
+	    if (empty($first_name)) {
+	        $first_name = $order->billing_first_name;
+	    }
             $last_name = $_POST['billing_last_name'];
+	    if (empty($last_name)) {
+		$last_name = $order->billing_last_name;
+	    }
             $country = $_POST['billing_country'];
             $city = $_POST['billing_city'];
-			   $billing_address = $_POST['billing_address_1'];
+	    $billing_address = $_POST['billing_address_1'];
             $return_url = $order->get_checkout_order_received_url(); 
             $billing_email = $_POST['billing_email'];
+	    if (empty($billing_email)) {
+	        $billing_email = $order->billing_email;
+	    }
             $biliing_fone = $_POST['billing_phone'];
+	    if (empty($biliing_fone)) {
+	        $biliing_fone = $order->billing_phone;
+	    }
             $avenue = $_POST['billing_address_2'];
             $order_amount = $order->get_total();
 
